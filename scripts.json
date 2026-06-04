@@ -1,0 +1,74 @@
+{
+  "scripts": [
+    {
+      "id": "ssl_pin",
+      "name": "获取域名 SSL Pin",
+      "description": "输入域名，输出证书公钥的 sha256 pin。依赖系统 openssl 命令。",
+      "command": [
+        "${python}",
+        "${root}/scripts/ssl_pin.py",
+        "${domain}",
+        "${port}"
+      ],
+      "inputs": [
+        {
+          "id": "domain",
+          "label": "域名",
+          "type": "text",
+          "required": true,
+          "default": "example.com"
+        },
+        {
+          "id": "port",
+          "label": "端口",
+          "type": "number",
+          "required": true,
+          "default": "443"
+        }
+      ]
+    },
+    {
+      "id": "image_to_ico",
+      "name": "1024 图片生成 ICO",
+      "description": "选择一张 1024x1024 或其他正方形 PNG/JPG 图片，生成多尺寸 ico 文件。",
+      "command": [
+        "${python}",
+        "${root}/scripts/image_to_ico.py",
+        "${image}",
+        "${output_dir}/${output_name}"
+      ],
+      "inputs": [
+        {
+          "id": "image",
+          "label": "图片",
+          "type": "image",
+          "required": true,
+          "filetypes": [
+            [
+              "图片文件",
+              "*.png *.jpg *.jpeg"
+            ],
+            [
+              "所有文件",
+              "*.*"
+            ]
+          ]
+        },
+        {
+          "id": "output_dir",
+          "label": "输出目录",
+          "type": "folder",
+          "required": true,
+          "default": "outputs"
+        },
+        {
+          "id": "output_name",
+          "label": "文件名",
+          "type": "text",
+          "required": true,
+          "default": "icon.ico"
+        }
+      ]
+    }
+  ]
+}
