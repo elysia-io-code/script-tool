@@ -93,6 +93,7 @@ chmod +x 启动脚本工具.command
 
 - 获取域名 SSL Pin：依赖系统 `openssl`
 - 1024 图片生成 ICO：优先使用 `Pillow`；没有 Pillow 时会在 macOS 上自动使用系统 `sips`
+- 查看 ICO 图片尺寸：读取 ico 文件中包含的图片数量、尺寸、位深、格式和数据大小
 
 可选安装 Pillow：
 

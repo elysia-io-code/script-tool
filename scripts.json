@@ -69,6 +69,34 @@
           "default": "icon.ico"
         }
       ]
+    },
+    {
+      "id": "inspect_ico",
+      "name": "查看 ICO 图片尺寸",
+      "description": "选择一个 ico 文件，查看里面包含的图片数量、尺寸、位深、格式和数据大小。",
+      "command": [
+        "${python}",
+        "${root}/scripts/inspect_ico.py",
+        "${ico}"
+      ],
+      "inputs": [
+        {
+          "id": "ico",
+          "label": "ICO 文件",
+          "type": "file",
+          "required": true,
+          "filetypes": [
+            [
+              "ICO 文件",
+              "*.ico"
+            ],
+            [
+              "所有文件",
+              "*.*"
+            ]
+          ]
+        }
+      ]
     }
   ]
 }
