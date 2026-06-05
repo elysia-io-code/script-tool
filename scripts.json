@@ -35,7 +35,8 @@
         "${python}",
         "${root}/scripts/image_to_ico.py",
         "${image}",
-        "${output_dir}/${output_name}"
+        "${output_dir}/${output_name}",
+        "${sizes}"
       ],
       "inputs": [
         {
@@ -67,6 +68,30 @@
           "type": "text",
           "required": true,
           "default": "icon.ico"
+        },
+        {
+          "id": "sizes",
+          "label": "包含尺寸",
+          "type": "multiselect",
+          "required": true,
+          "options": [
+            "16",
+            "24",
+            "32",
+            "48",
+            "64",
+            "128",
+            "256"
+          ],
+          "default": [
+            "16",
+            "24",
+            "32",
+            "48",
+            "64",
+            "128",
+            "256"
+          ]
         }
       ]
     },

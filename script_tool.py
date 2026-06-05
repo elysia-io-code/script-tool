@@ -212,6 +212,19 @@ class ScriptTool:
             self.field_vars[field_id] = (field, var)
             return
 
+        if field_type == "multiselect":
+            option_vars = []
+            selected_defaults = {str(item) for item in field.get("default", [])}
+            options_frame = ttk.Frame(row, style="Field.TFrame")
+            options_frame.pack(side="left", fill="x", expand=True)
+            for option in field.get("options", []):
+                option_text = str(option)
+                var = BooleanVar(value=option_text in selected_defaults)
+                ttk.Checkbutton(options_frame, text=option_text, variable=var).pack(side="left", padx=(0, 12), pady=2)
+                option_vars.append((option_text, var))
+            self.field_vars[field_id] = (field, option_vars)
+            return
+
         var = StringVar(value=default)
         self.field_vars[field_id] = (field, var)
 
@@ -252,7 +265,10 @@ class ScriptTool:
     def collect_values(self):
         values = {}
         for field_id, (field, var) in self.field_vars.items():
-            value = var.get()
+            if field.get("type") == "multiselect":
+                value = ",".join(option for option, option_var in var if option_var.get())
+            else:
+                value = var.get()
             if field.get("required", False) and (value is None or str(value).strip() == ""):
                 raise ValueError(f"请填写：{field.get('label', field_id)}")
             values[field_id] = value
